@@ -1,0 +1,46 @@
+body {
+	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+	background-color: rgb(136, 231, 238);
+}
+
+.container {
+	margin: auto;
+	width: 60%;
+}
+
+img {
+	display: inline-block;
+}
+
+.caption {
+	display: block;
+	text-align: center;
+}
+
+.garments {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.garment {
+	flex: 1;
+	background-color: rgb(183, 164, 187);
+	border: 1px solid white;
+	padding: 1em;
+	margin: 0.25em;
+	border-radius: 0.5em;
+}
+
+.error{
+	text-align: center;
+	color: red;
+}
+.success{
+	text-align: center;
+	color: green;
+}
+
+.hidden{
+	display: none;
+}
