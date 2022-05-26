@@ -24,9 +24,9 @@ img {
 }
 
 .garment {
-	flex: 1;
-	background-color: rgb(183, 164, 187);
-	border: 1px solid white;
+	flex : 1;
+	background-color: beige;
+	border: 1px solid greenyellow;
 	padding: 1em;
 	margin: 0.25em;
 	border-radius: 0.5em;
