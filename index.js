@@ -15,9 +15,14 @@ app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-const DATABASE_URL = process.env.DATABASE_URL;
+const config = {
+	connectionString: process.env.DATABASE_URL || 'postgres://gary:gar123@localhost:5432/garment_app',
+	max: 30,
+	// ssl: { rejectUnauthorized : false}
+};
+
 const pgp = PgPromise({});
-const db = pgp(DATABASE_URL);
+const db = pgp(config);
 
 API(app, db);
 
