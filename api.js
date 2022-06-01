@@ -9,7 +9,7 @@ module.exports = function(app, db){
 
 		const { gender, season } = req.query;
 		let garments = [];
-		//? add some sql queries that filter on gender & season
+		// add some sql queries that filter on gender & season
 		const get_all_garment = `select * from garment`;
 		const gender_and_season = `select * from garment where gender = $1 and season = $2`;
 		const gender_or_season = `select * from garment where gender = $1 or season = $2`;
@@ -23,6 +23,7 @@ module.exports = function(app, db){
 			garments = await db.many(get_all_garment);
 		}
 	
+		// console.log(garments);
 		res.json({
 			data: garments
 		});

@@ -23,10 +23,24 @@ img {
 	flex-wrap: wrap;
 }
 
+.addGarment{
+	background-color: rgb(233, 151, 226);
+	border: 1px solid rgb(255, 130, 47);
+	padding: 1em;
+	margin: 0.25em;
+	border-radius: 0.5em;
+	align-items: center;
+}
+
+.add {
+	border-radius: 0.5em;
+	color: rgb(233, 151, 226);
+}
+
 .garment {
 	flex : 1;
-	background-color: beige;
-	border: 1px solid greenyellow;
+	background-color: rgb(233, 151, 176);
+	border: 1px solid rgb(255, 47, 47);
 	padding: 1em;
 	margin: 0.25em;
 	border-radius: 0.5em;
