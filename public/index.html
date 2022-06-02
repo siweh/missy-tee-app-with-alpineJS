@@ -23,19 +23,40 @@
             img: '',
             season: '',
             gender: '',
-            price: 0, garments: [], seasonFilter: '', genderFilter: '', priceFilter: 0.00, filterByGenderAndSeason() {
-                fetch(`/api/garments?gender=${this.genderFilter}&season=${this.seasonFilter}`)
+            price: 0, garments: [], seasonFilter: '', genderFilter: '', priceFilter: 0.00, currentGarment: '', infoMessage: '', filterByGenderAndSeason() {
+                var url = `/api/garments?gender=${this.genderFilter}&season=${this.seasonFilter}`
+                if(this.genderFilter === 'All' || this.genderFilter === 'Unisex'){
+                    url = `/api/garments?season=${this.seasonFilter}`
+                }else if(this.seasonFilter === 'All' || this.seasonFilter === 'All Seasons'){
+                    url = `/api/garments?gender=${this.genderFilter}`
+                }
+                fetch(url)
                     .then(r => r.json())
                     .then(result => this.garments = result.data)
                     .catch(error => console.error(error))
             }, filterByPrice() {
-                fetch(`/api/garments/price/${this.priceFilter}`)
+                var url = `/api/garments/price?price=${this.priceFilter}`
+                fetch(url)
                     .then(r => r.json())
                     .then(result => this.garments = result.data)
                     .catch(error => console.error(error))
             }, addNewGarment: false, newGarments: [], addGarment: false}" x-init="fetch('/api/garments')
       .then(r => r.json())
-      .then(data => garments = data.data )">
+      .then(data => garments = data.data ), addNewGarment() {
+          var url = `/api/garment`
+          fetch(url),
+      {
+          headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+          },
+          method: 'POST',
+          body: JSON.stringify({description: garments.description, img: garments.img, price: garments.price, season: garments.season, gender: garments.gender})
+      })
+      .then(function(res){ console.log(res) })
+      .catch(function(res){ console.log(res) }),
+      garmentsData().updateGarments()}
+      ">
             <h1>Missy Tee - clothing store</h1>
             <div class="top-section">
                 <div class="filter">
@@ -91,6 +112,7 @@
                             step="50" class="priceRange" value="0" />
                         R<span class="showPriceRange" x-text="priceFilter">0</span>.00
                     </div>
+                    <span class="success"></span>
                 </div>
             </div>
             <br />
@@ -132,20 +154,7 @@
                             </div>
                         </div>
                         <br />
-                        <button @click="addNewGarment = ! addNewGarment,
-                fetch('/api/garment',
-                {
-                    headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                    },
-                    method: 'POST',
-                    body: JSON.stringify({description: garments.description, img: garments.img, price: garments.price, season: garments.season, gender: garments.gender})
-                })
-                .then(function(res){ console.log(res) })
-                .catch(function(res){ console.log(res) }),
-                garmentsData().updateGarments()
-                ">
+                        <button @click="addNewGarment = ! addNewGarment, addNewGarment()">
                             Add
                         </button>
                     </form>
@@ -163,6 +172,7 @@
                             <span x-text="garment.description"></span>
                             R<span x-text="garment.price"></span>
                             <img x-bind:src="`./images/${garment.img}`" />
+                            <button class="delete" @click="garments = garments.filter((currentGarment) => currentGarment !== garment)">delete</button>
                         </div>
                     </template>
                 </div>

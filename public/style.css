@@ -32,6 +32,11 @@ img {
 	align-items: center;
 }
 
+.delete{
+	background-color: rgb(199, 45, 45);
+	color: white;
+}
+
 .add {
 	border-radius: 0.5em;
 	color: rgb(233, 151, 226);

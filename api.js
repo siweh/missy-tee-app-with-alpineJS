@@ -29,6 +29,16 @@ module.exports = function(app, db){
 		});
 	});
 
+	app.get('/api/garments/price', async function(req, res) {
+		const { price } = req.query;
+		let garments = [];
+		garments = await db.many(`select * from garment where price <= $1`, [price]);
+
+		res.json({
+			data: garments
+		});
+	});
+
 	app.put('/api/garment/:id', async function (req, res) {
 
 		try {
